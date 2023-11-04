@@ -1,0 +1,1 @@
+INSERT INTO Book VALUES (1, 'Flam', 'Han bin');
