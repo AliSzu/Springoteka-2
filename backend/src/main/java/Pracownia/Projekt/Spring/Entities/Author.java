@@ -20,7 +20,7 @@ import java.util.Set;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id2;
+    private Long id;
 
     @Column
     private String firstName;

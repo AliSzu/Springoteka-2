@@ -18,3 +18,4 @@ spring:
 springdoc:
   swagger-ui:
     path: /api
+
