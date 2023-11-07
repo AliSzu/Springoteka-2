@@ -1,0 +1,20 @@
+{
+  "menu": {
+    "books": "Books",
+    "authors": "Authors",
+    "libraries": "Libraries",
+    "users": "Users"
+  },
+  "column": {
+    "id": "Id",
+    "ISBN": "ISBN",
+    "title": "Title",
+    "author": "Author",
+    "status": "Status"
+  },
+  "status": {
+    "AVAILABLE": "Available",
+    "ON_LOAN": "On loan",
+    "null": "Unknown"
+  }
+}

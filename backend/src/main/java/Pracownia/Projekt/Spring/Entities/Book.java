@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +23,9 @@ public class Book {
     @Column
     private String title;
 
+    @Column
+    private Integer ISBN;
+
     @ManyToOne
     private Author author;
 
@@ -29,5 +33,8 @@ public class Book {
     @CreationTimestamp
     private Date createdAt;
     public Book() {}
+
+    @OneToMany(mappedBy = "book")
+    private Set<BookCopy> copies;
 
 }
