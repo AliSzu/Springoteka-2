@@ -1,9 +1,20 @@
 {
-    "menu": {
-      "books": "Książki",
-      "authors": "Autorzy",
-      "libraries": "Księgarnie",
-      "users": "Użytkownicy"
-    }
+  "menu": {
+    "books": "Książki",
+    "authors": "Autorzy",
+    "libraries": "Księgarnie",
+    "users": "Użytkownicy"
+  },
+  "column": {
+    "id": "Id",
+    "ISBN": "ISBN",
+    "title": "Tytuł",
+    "author": "Autor",
+    "status": "Status"
+  },
+  "status": {
+    "AVAILABLE": "Dostępne",
+    "ON_LOAN": "Wypożyczone",
+    "null": "Nie wiadomo"
   }
-  
+}

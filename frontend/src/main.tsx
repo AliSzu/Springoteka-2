@@ -5,11 +5,15 @@ import { router } from "./router/router";
 import "./index.css";
 import { ConfigProvider } from "antd";
 import { theme } from "./constants/theme";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ConfigProvider theme={theme}>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ConfigProvider>
   </React.StrictMode>
 );
