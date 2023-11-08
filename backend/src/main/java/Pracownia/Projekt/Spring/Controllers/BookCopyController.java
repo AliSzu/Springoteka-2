@@ -1,17 +1,13 @@
 package Pracownia.Projekt.Spring.Controllers;
 
 import Pracownia.Projekt.Spring.DTO.BookCopyDto;
-import Pracownia.Projekt.Spring.Entities.BookCopy;
 import Pracownia.Projekt.Spring.Mapper.BookCopyMapper;
-import Pracownia.Projekt.Spring.Mapper.BookMapper;
+import Pracownia.Projekt.Spring.Model.PageResponse;
 import Pracownia.Projekt.Spring.Services.BookCopyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @Tag(name = "BookCopy")
@@ -29,10 +25,11 @@ public class BookCopyController {
     }
 
     @GetMapping("/bookCopies")
-    public List<BookCopyDto> getBookCopies() {
+    public PageResponse<BookCopyDto> getBookCopies(@RequestParam(required = false) Integer pageNumber,
+                                                   @RequestParam(required = false) Integer pageSize) {
 
-        List<BookCopy> bookCopyList = bookCopyService.getAll();
-        return bookCopyMapper.bookCopyToDto(bookCopyList);
+        Page<BookCopyDto> bookCopyPage =  bookCopyService.getAll(pageNumber, pageSize);
+        return new PageResponse<>(bookCopyPage);
     }
 
     @PostMapping("/book/{bookId}/bookCopies")
