@@ -1,13 +1,13 @@
+import { Flex } from "antd";
+import BookCopyDataOptions from "../../components/BookCopy/BookCopyDataOptions";
 import BookCopyTable from "../../components/BookCopy/BookCopyTable";
-import { useGetBookCopiesQuery } from "../../service/bookCopies";
 
 const Books = () => {
-  // const { data } = useGetBookCopiesQuery();
-  // console.log(data);
   return (
-    <>
+    <Flex vertical={true} gap={"large"}>
+      <BookCopyDataOptions />
       <BookCopyTable />
-    </>
+    </Flex>
   );
 };
 

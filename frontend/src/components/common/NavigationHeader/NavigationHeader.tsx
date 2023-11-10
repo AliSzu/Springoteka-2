@@ -41,7 +41,7 @@ const NavigationHeader = () => {
   
   return (
     <Header style={{backgroundColor: 'white'}}>
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
     </Header>
   );
 };

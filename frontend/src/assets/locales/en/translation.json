@@ -16,5 +16,15 @@
     "AVAILABLE": "Available",
     "ON_LOAN": "On loan",
     "null": "Unknown"
-  }
+  },
+  "option": {
+    "ISBN": "ISBN",
+    "title": "Title",
+    "author": "Author",
+    "status": "Status"
+  },
+  "placeholder": {
+    "searchBy": "Search by..."
+  },
+  "search": "Search"
 }

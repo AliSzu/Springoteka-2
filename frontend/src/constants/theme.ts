@@ -1,6 +1,7 @@
 export const theme = Object.freeze({
     token: {
-      colorPrimary: "#759B9B"
+      colorPrimary: "#759B9B",
+      borderRadius: "4px"
     },
     components: {
       Layout: {

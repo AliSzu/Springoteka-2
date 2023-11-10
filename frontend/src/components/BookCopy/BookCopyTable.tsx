@@ -1,4 +1,3 @@
-import classes from "./Books.module.scss";
 import { Badge, Table } from "antd";
 import { useEffect, useState } from "react";
 import { BookCopy } from "../../models/BookCopy";
@@ -7,6 +6,7 @@ import i18n from "../../i18n/i18n";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import { useGetBookCopiesQuery } from "../../service/bookCopies";
+import Container from "../common/Container/Container";
 
 const getBadgeColor = (status: Status) => {
   switch (status) {
@@ -110,7 +110,7 @@ const BookCopyTable = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <Container>
       <Table
         rowSelection={rowSelection}
         columns={columns}
@@ -124,7 +124,7 @@ const BookCopyTable = () => {
         }}
         onChange={handleTableChange}
       />
-    </div>
+    </Container>
   );
 };
 
