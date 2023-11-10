@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-
-@EnableJpaRepositories("Pracownia.Projekt.Spring.Repositories")
 public class SpringApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
