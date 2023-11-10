@@ -2,10 +2,13 @@ import BookCopyTable from "../../components/BookCopy/BookCopyTable";
 import { useGetBookCopiesQuery } from "../../service/bookCopies";
 
 const Books = () => {
-  const { data } = useGetBookCopiesQuery();
+  // const { data } = useGetBookCopiesQuery();
+  // console.log(data);
   return (
-  <>{data && <BookCopyTable bookCopyData={data} />}</>
-  )
+    <>
+      <BookCopyTable />
+    </>
+  );
 };
 
 export default Books;

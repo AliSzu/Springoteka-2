@@ -11,12 +11,12 @@ class PageBuilderTest {
     @Test
     void shouldReturnFirstPageWhenProvidedPageNumberIsNegative() {
         PageRequest pageRequestWithNegative = PageBuilder.buildPageRequest(-20, 2);
-        assertThat(pageRequestWithNegative.getPageNumber()).isEqualTo(0);
+        assertThat(pageRequestWithNegative.getPageNumber()).isEqualTo(1);
     }
 
     @Test
     void shouldReturnFirstPageWhenProvidedPageNumberIsNull() {
         PageRequest pageRequestWithNull = PageBuilder.buildPageRequest(null, 22);
-        assertThat(pageRequestWithNull.getPageNumber()).isEqualTo(0);
+        assertThat(pageRequestWithNull.getPageNumber()).isEqualTo(1);
     }
 }

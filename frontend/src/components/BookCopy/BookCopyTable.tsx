@@ -1,14 +1,13 @@
 import classes from "./Books.module.scss";
 import { Badge, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookCopy } from "../../models/BookCopy";
 import { Status } from "../../constants/enums";
 import i18n from "../../i18n/i18n";
+import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
+import type { FilterValue, SorterResult } from "antd/es/table/interface";
+import { useGetBookCopiesQuery } from "../../service/bookCopies";
 
-interface BookCopyTableProps {
-  bookCopyData: BookCopy[];
-}
 
 const getBadgeColor = (status: Status) => {
   switch (status) {
@@ -62,8 +61,38 @@ const columns: ColumnsType<BookCopy> = [
   },
 ];
 
-const BookCopyTable = ({ bookCopyData }: BookCopyTableProps) => {
+interface TableParams {
+  pagination?: TablePaginationConfig;
+  sortField?: string;
+  sortOrder?: string;
+  filters?: Record<string, FilterValue>;
+}
+
+const BookCopyTable = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [tableParams, setTableParams] = useState<TableParams>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+    },
+  });
+
+  const { data, isFetching } = useGetBookCopiesQuery({
+    pageSize: tableParams.pagination?.pageSize,
+    pageNumber: tableParams.pagination?.current
+  });
+
+  useEffect(() => {
+    if (data) {
+      setTableParams({
+        pagination: {
+          current: data.pageable.pageNumber,
+          pageSize: data.pageable.pageSize,
+          total: data.pageable.totalElements,
+        },
+      });
+    }
+  }, [data]);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
@@ -75,13 +104,22 @@ const BookCopyTable = ({ bookCopyData }: BookCopyTableProps) => {
     onChange: onSelectChange,
   };
 
+  const handleTableChange = (pagination: TablePaginationConfig) => {
+    setTableParams({
+      pagination,
+    });
+  };
+
   return (
     <div className={classes.container}>
       <Table
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={bookCopyData}
+        dataSource={data ? data.content : []}
+        loading={isFetching}
         rowKey={(record) => record.id}
+        pagination={tableParams.pagination}
+        onChange={handleTableChange}
       />
     </div>
   );
