@@ -8,7 +8,6 @@ import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { FilterValue, SorterResult } from "antd/es/table/interface";
 import { useGetBookCopiesQuery } from "../../service/bookCopies";
 
-
 const getBadgeColor = (status: Status) => {
   switch (status) {
     case Status.Available:
@@ -79,7 +78,7 @@ const BookCopyTable = () => {
 
   const { data, isFetching } = useGetBookCopiesQuery({
     pageSize: tableParams.pagination?.pageSize,
-    pageNumber: tableParams.pagination?.current
+    pageNumber: tableParams.pagination?.current,
   });
 
   useEffect(() => {
@@ -115,10 +114,14 @@ const BookCopyTable = () => {
       <Table
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={data ? data.content : []}
+        dataSource={data && !isFetching ? data.content : []}
         loading={isFetching}
         rowKey={(record) => record.id}
-        pagination={tableParams.pagination}
+        pagination={{
+          ...tableParams.pagination,
+          showSizeChanger: true,
+          pageSizeOptions: ["5", "10", "15"],
+        }}
         onChange={handleTableChange}
       />
     </div>
