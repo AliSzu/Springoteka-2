@@ -1,12 +1,18 @@
-import { Badge, Table } from "antd";
+import { Badge, Space } from "antd";
 import { useEffect, useState } from "react";
 import { BookCopy } from "../../models/BookCopy";
-import { Status } from "../../constants/enums";
+import { Modal, Status } from "../../constants/enums";
 import i18n from "../../i18n/i18n";
-import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
-import type { FilterValue, SorterResult } from "antd/es/table/interface";
+import type { TablePaginationConfig } from "antd/es/table";
+import type { FilterValue } from "antd/es/table/interface";
 import { useGetBookCopiesQuery } from "../../service/bookCopies";
+import type { ProColumns } from '@ant-design/pro-components';
 import Container from "../common/Container/Container";
+import { ProTable } from '@ant-design/pro-components';
+import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../store/store";
+import { showModal } from "../../store/slices/modalSlice";
+
 
 const getBadgeColor = (status: Status) => {
   switch (status) {
@@ -19,7 +25,7 @@ const getBadgeColor = (status: Status) => {
   }
 };
 
-const columns: ColumnsType<BookCopy> = [
+const columns: ProColumns<BookCopy>[] = [
   {
     title: i18n.t("column.id"),
     dataIndex: "id",
@@ -76,6 +82,9 @@ const BookCopyTable = () => {
     },
   });
 
+  const {t} = useTranslation();
+  const dispatch = useAppDispatch();
+
   const { data, isFetching } = useGetBookCopiesQuery({
     pageSize: tableParams.pagination?.pageSize,
     pageNumber: tableParams.pagination?.current,
@@ -109,9 +118,13 @@ const BookCopyTable = () => {
     });
   };
 
+  const handleResetSelectedRows = () => setSelectedRowKeys([])
+
+  const handleDelete = () => dispatch(showModal(Modal.deleteBookCopy))
+
   return (
     <Container>
-      <Table
+      <ProTable<BookCopy>
         rowSelection={rowSelection}
         columns={columns}
         dataSource={data && !isFetching ? data.content : []}
@@ -122,7 +135,18 @@ const BookCopyTable = () => {
           showSizeChanger: true,
           pageSizeOptions: ["5", "10", "15"],
         }}
+        tableAlertOptionRender={() => {
+          return (
+            <Space size={16}>
+              <a onClick={handleResetSelectedRows}>{t("option.cancel")}</a>
+              <a onClick={handleDelete}>{t("option.delete")}</a>
+            </Space>
+          );
+        }}
+        tableAlertRender={(selectedItems) => t("alert.selectedItems", {number: selectedItems.selectedRowKeys.length})}
+        scroll={{ x: 800 }}
         onChange={handleTableChange}
+        search={false}
       />
     </Container>
   );

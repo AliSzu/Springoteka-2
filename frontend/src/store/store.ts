@@ -1,11 +1,12 @@
 import { configureStore} from '@reduxjs/toolkit'
 import { bookCopyApi } from '../service/bookCopies';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { modalSlice } from './slices/modalSlice';
 
 
 export const store = configureStore({
     reducer: {
-        // Add the generated reducer as a specific top-level slice
+        modal: modalSlice.reducer,
         [bookCopyApi.reducerPath]: bookCopyApi.reducer,
     },
     // Adding the api middleware enables caching, invalidation, polling,

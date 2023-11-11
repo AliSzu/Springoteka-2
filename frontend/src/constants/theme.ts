@@ -1,7 +1,9 @@
-export const theme = Object.freeze({
+import { ThemeConfig } from "antd";
+
+export const theme: ThemeConfig = Object.freeze({
     token: {
       colorPrimary: "#759B9B",
-      borderRadius: "4px"
+      borderRadius: 4
     },
     components: {
       Layout: {

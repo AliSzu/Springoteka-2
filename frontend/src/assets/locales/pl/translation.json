@@ -21,10 +21,15 @@
     "ISBN": "ISBN",
     "title": "Tytuł",
     "author": "Autor",
-    "status": "Status"
+    "status": "Status",
+    "cancel": "Anuluj",
+    "delete": "Usuń"
   },
   "placeholder": {
     "searchBy": "Szukaj po..."
   },
-  "search": "Szukaj"
+  "search": "Szukaj",
+  "alert": {
+    "selectedItems": "Zaznaczono {{number}} elementów" 
+  }
 }
