@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static Pracownia.Projekt.Spring.Utils.PageBuilder.buildPageRequest;
 
 @Service
@@ -51,5 +53,23 @@ public class BookCopyServiceImpl implements BookCopyService{
         BookCopy bookCopy = bookCopyRepository.save(newCopy);
 
         return bookCopyMapper.bookCopyToDto(bookCopy);
+    }
+
+    @Override
+    public void deleteBookCopy(Integer id) {
+        if(!bookCopyRepository.existsById(id)) {
+            throw new EntityNotFoundException("Book Copy with ID " + id + " not found");
+        }
+        bookCopyRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteBookCopyInBulk(List<Long> ids) {
+        for (Long id : ids) {
+            if(!bookCopyRepository.existsById(Math.toIntExact(id))) {
+                throw new EntityNotFoundException("Book Copy with ID" + id + " not found");
+            }
+        }
+        bookCopyRepository.deleteBookCopyInBulk(ids);
     }
 }
