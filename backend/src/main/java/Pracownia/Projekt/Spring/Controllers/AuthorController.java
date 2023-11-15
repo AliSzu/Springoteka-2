@@ -36,7 +36,6 @@ public class AuthorController {
 
     @PostMapping
     public Author createAuthor(@RequestBody @Valid @NonNull PostAuthorDTO authorDTO) {
-        Author author = AuthorMapper.INSTANCE.dtoToEntity(authorDTO);
-        return authorService.createAuthor(author);
+        return authorService.createAuthor(authorDTO);
     }
 }

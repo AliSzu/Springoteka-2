@@ -1,6 +1,6 @@
 package Pracownia.Projekt.Spring.Entities;
 
-import Pracownia.Projekt.Spring.Constants.Status;
+import Pracownia.Projekt.Spring.Utils.Constants.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

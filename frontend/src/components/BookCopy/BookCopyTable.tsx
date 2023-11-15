@@ -1,14 +1,18 @@
-import classes from "./Books.module.scss";
-import { Badge, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import { useState } from "react";
+import { Badge, Space } from "antd";
+import { useEffect, useState } from "react";
 import { BookCopy } from "../../models/BookCopy";
-import { Status } from "../../constants/enums";
+import { Modal, Status } from "../../constants/enums";
 import i18n from "../../i18n/i18n";
+import type { TablePaginationConfig } from "antd/es/table";
+import type { FilterValue } from "antd/es/table/interface";
+import { useGetBookCopiesQuery } from "../../service/bookCopies";
+import type { ProColumns } from '@ant-design/pro-components';
+import Container from "../common/Container/Container";
+import { ProTable } from '@ant-design/pro-components';
+import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../store/store";
+import { showModal } from "../../store/slices/modalSlice";
 
-interface BookCopyTableProps {
-  bookCopyData: BookCopy[];
-}
 
 const getBadgeColor = (status: Status) => {
   switch (status) {
@@ -21,7 +25,7 @@ const getBadgeColor = (status: Status) => {
   }
 };
 
-const columns: ColumnsType<BookCopy> = [
+const columns: ProColumns<BookCopy>[] = [
   {
     title: i18n.t("column.id"),
     dataIndex: "id",
@@ -62,8 +66,41 @@ const columns: ColumnsType<BookCopy> = [
   },
 ];
 
-const BookCopyTable = ({ bookCopyData }: BookCopyTableProps) => {
+interface TableParams {
+  pagination?: TablePaginationConfig;
+  sortField?: string;
+  sortOrder?: string;
+  filters?: Record<string, FilterValue>;
+}
+
+const BookCopyTable = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [tableParams, setTableParams] = useState<TableParams>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+    },
+  });
+
+  const {t} = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const { data, isFetching } = useGetBookCopiesQuery({
+    pageSize: tableParams.pagination?.pageSize,
+    pageNumber: tableParams.pagination?.current,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setTableParams({
+        pagination: {
+          current: data.pageable.pageNumber,
+          pageSize: data.pageable.pageSize,
+          total: data.pageable.totalElements,
+        },
+      });
+    }
+  }, [data]);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
@@ -75,15 +112,43 @@ const BookCopyTable = ({ bookCopyData }: BookCopyTableProps) => {
     onChange: onSelectChange,
   };
 
+  const handleTableChange = (pagination: TablePaginationConfig) => {
+    setTableParams({
+      pagination,
+    });
+  };
+
+  const handleResetSelectedRows = () => setSelectedRowKeys([])
+
+  const handleDelete = () => dispatch(showModal(Modal.deleteBookCopy))
+
   return (
-    <div className={classes.container}>
-      <Table
+    <Container>
+      <ProTable<BookCopy>
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={bookCopyData}
+        dataSource={data && !isFetching ? data.content : []}
+        loading={isFetching}
         rowKey={(record) => record.id}
+        pagination={{
+          ...tableParams.pagination,
+          showSizeChanger: true,
+          pageSizeOptions: ["5", "10", "15"],
+        }}
+        tableAlertOptionRender={() => {
+          return (
+            <Space size={16}>
+              <a onClick={handleResetSelectedRows}>{t("option.cancel")}</a>
+              <a onClick={handleDelete}>{t("option.delete")}</a>
+            </Space>
+          );
+        }}
+        tableAlertRender={(selectedItems) => t("alert.selectedItems", {number: selectedItems.selectedRowKeys.length})}
+        scroll={{ x: 800 }}
+        onChange={handleTableChange}
+        search={false}
       />
-    </div>
+    </Container>
   );
 };
 

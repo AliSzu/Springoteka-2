@@ -1,11 +1,18 @@
+import { Flex } from "antd";
+import BookCopyDataOptions from "../../components/BookCopy/BookCopyDataOptions";
 import BookCopyTable from "../../components/BookCopy/BookCopyTable";
-import { useGetBookCopiesQuery } from "../../service/bookCopies";
+import DeleteBookCopyModal from "../../components/BookCopy/Modal/DeleteBookCopyModal";
 
 const Books = () => {
-  const { data } = useGetBookCopiesQuery();
   return (
-  <>{data && <BookCopyTable bookCopyData={data} />}</>
-  )
+    <>
+      <DeleteBookCopyModal />
+      <Flex vertical={true} gap={"large"}>
+        <BookCopyDataOptions />
+        <BookCopyTable />
+      </Flex>
+    </>
+  );
 };
 
 export default Books;
