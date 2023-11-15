@@ -1,12 +1,8 @@
 package Pracownia.Projekt.Spring;
 
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 public class SpringApp extends SpringBootServletInitializer {
@@ -15,13 +11,6 @@ public class SpringApp extends SpringBootServletInitializer {
         SpringApplication.run(SpringApp.class, args);
     }
 
-    @Bean
-    public GroupedOpenApi api() {
-        return GroupedOpenApi.builder()
-                .group("api") // Swagger group name
-                .pathsToMatch("/api/**") // Customize URL path
-                .build();
-    }
 }
 
 
