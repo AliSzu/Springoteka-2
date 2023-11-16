@@ -16,7 +16,7 @@ public class PageResponse<T> {
 
     public PageResponse(Page<T> page) {
         this.content = page.getContent();
-        this.pageable = new CustomPageable(page.getPageable().getPageNumber() + 1,
-                page.getPageable().getPageSize(), page.getTotalElements());
+        this.pageable = new CustomPageable(page.getPageable().getPageNumber(),
+                page.getPageable().getPageSize(), page.getTotalElements(), page.getSort());
     }
 }

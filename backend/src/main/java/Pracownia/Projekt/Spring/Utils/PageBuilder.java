@@ -1,12 +1,13 @@
 package Pracownia.Projekt.Spring.Utils;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import static Pracownia.Projekt.Spring.Utils.Constants.Constants.DEFAULT_PAGE;
 import static Pracownia.Projekt.Spring.Utils.Constants.Constants.DEFAULT_PAGE_SIZE;
 
 public class PageBuilder {
-    public static PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+    public static PageRequest buildPageRequest(Integer pageNumber, Integer pageSize, String sortBy) {
         int queryPageNumber;
         int queryPageSize;
 
@@ -25,6 +26,6 @@ public class PageBuilder {
             queryPageSize = pageSize;
         }
 
-        return PageRequest.of(queryPageNumber, queryPageSize);
+        return PageRequest.of(queryPageNumber, queryPageSize, Sort.by(sortBy));
     }
 }

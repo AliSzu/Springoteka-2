@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static Pracownia.Projekt.Spring.Utils.PageBuilder.buildPageRequest;
+import static Pracownia.Projekt.Spring.Utils.SortByFormatter.bookCopySortFormatter;
 
 @Service
 public class BookCopyServiceImpl implements BookCopyService{
@@ -29,8 +30,10 @@ public class BookCopyServiceImpl implements BookCopyService{
     }
 
     @Override
-    public PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize) {
-        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
+    public PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        String formattedSortBy = bookCopySortFormatter(sortBy);
+
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, formattedSortBy);
 
         Page<BookCopy> bookCopyPage = bookCopyRepository.findAll(pageRequest);
         Page<BookCopyDto> bookCopyDtoPage = bookCopyPage.map(bookCopyMapper::bookCopyToDto);
