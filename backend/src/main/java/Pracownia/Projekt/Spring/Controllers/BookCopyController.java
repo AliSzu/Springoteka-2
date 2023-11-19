@@ -2,6 +2,7 @@ package Pracownia.Projekt.Spring.Controllers;
 
 import Pracownia.Projekt.Spring.DTO.BookCopyDto;
 import Pracownia.Projekt.Spring.Model.PageResponse;
+import Pracownia.Projekt.Spring.Model.SearchCriteria;
 import Pracownia.Projekt.Spring.Services.BookCopyService;
 import Pracownia.Projekt.Spring.Validator.CustomAnnotation.ValuesAllowed;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +33,11 @@ public class BookCopyController {
     @GetMapping("/bookCopies")
     public PageResponse<BookCopyDto> getBookCopies(@Parameter(description = "The initial page from which to return the results.") @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
                                                    @Parameter(description = "Number of results to return per page.") @RequestParam(required = false, defaultValue = "5") Integer pageSize,
-                                                   @Parameter(description = "Field by which the data should be sorted. The default option - createdAt. The all possible options createdAt, title, status and author")
-                                                   @RequestParam(required = false, defaultValue = "createdAt") @ValuesAllowed(values = {"createdAt", "title", "status", "author"}) String sortBy) {
+                                                   @Parameter(description = "Field by which the data should be sorted. Possible options are createdAt, title, status and author")
+                                                   @RequestParam(required = false, defaultValue = "createdAt") @ValuesAllowed(values = {"createdAt", "title", "status", "author"}) String sortBy,
+                                                   @Parameter(description = "Order in which data should be sorted. Possible options are desc or asc") @RequestParam(required = false, defaultValue = "desc") String orderBy) {
 
-        return bookCopyService.getAll(pageNumber, pageSize, sortBy);
+        return bookCopyService.getAll(pageNumber, pageSize, sortBy, orderBy);
     }
 
     @Operation(summary = "Get Book Copy by id")

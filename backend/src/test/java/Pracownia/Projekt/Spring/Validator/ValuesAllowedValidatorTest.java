@@ -19,23 +19,8 @@ class ValuesAllowedValidatorTest {
 
     private static final String[] ALLOWED_SORT_FIELDS = new String[]{"title", "author", "createdAt", "status"};
 //    private static final String ALLOWED_SORT_FIELDS_DELIMITED = String.join(",", Arrays.asList(ALLOWED_SORT_FIELDS));
-//
-//    private static Validator validator;
-//
-//    @BeforeAll
-//    public static void setupValidator() throws Exception {
-//        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-//            validator = factory.getValidator();
-//        }
-//    }
-//
-//    @Test
-//    public void testValidationWithSpringValidator() {
-//        ValuesAllowed valuesAllowed = ValuesAllowed.class.getAnnotation(ValuesAllowed.class);
-//
-//        Set<ConstraintViolation<ValuesAllowed>> violations = validator.validate(valuesAllowed);
-//
-//        assertEquals(0, violations.size());
-//    }
+
+
+
 
 }

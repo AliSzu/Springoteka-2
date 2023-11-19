@@ -10,13 +10,13 @@ class PageBuilderTest {
 
     @Test
     void shouldReturnFirstPageWhenProvidedPageNumberIsNegative() {
-        PageRequest pageRequestWithNegative = PageBuilder.buildPageRequest(-20, 2, "createdAt");
+        PageRequest pageRequestWithNegative = PageBuilder.buildPageRequest(-20, 2, "createdAt", "desc");
         assertThat(pageRequestWithNegative.getPageNumber()).isEqualTo(1);
     }
 
     @Test
     void shouldReturnFirstPageWhenProvidedPageNumberIsNull() {
-        PageRequest pageRequestWithNull = PageBuilder.buildPageRequest(null, 22, "createdAt");
+        PageRequest pageRequestWithNull = PageBuilder.buildPageRequest(null, 22, "createdAt", "desc");
         assertThat(pageRequestWithNull.getPageNumber()).isEqualTo(1);
     }
 }

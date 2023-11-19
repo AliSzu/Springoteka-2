@@ -30,10 +30,10 @@ public class BookCopyServiceImpl implements BookCopyService{
     }
 
     @Override
-    public PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize, String sortBy) {
+    public PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize, String sortBy, String orderBy) {
         String formattedSortBy = bookCopySortFormatter(sortBy);
 
-        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, formattedSortBy);
+        PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, formattedSortBy, orderBy);
 
         Page<BookCopy> bookCopyPage = bookCopyRepository.findAll(pageRequest);
         Page<BookCopyDto> bookCopyDtoPage = bookCopyPage.map(bookCopyMapper::bookCopyToDto);
