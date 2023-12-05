@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface BookCopyService {
 
-    PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize);
+    PageResponse<BookCopyDto> getAll(Integer pageNumber, Integer pageSize, String sortBy, String orderBy);
     BookCopyDto getById(Integer id);
     BookCopyDto createBookCopy(Integer bookId);
     void deleteBookCopy(Integer id);

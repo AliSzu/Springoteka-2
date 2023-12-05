@@ -2,7 +2,10 @@ C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Services\BookCopyService.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\DTO\BookCopyDto.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Exception\ErrorMessage.java
+C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Config\OpenApi30Configuration.java
+C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Validator\CustomAnnotation\ValuesAllowed.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Utils\Constants\Status.java
+C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Model\CustomPageable.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Model\PageResponse.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Controllers\BookController.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Controllers\AuthorController.java
@@ -29,4 +32,5 @@ C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Entities\Book.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Entities\Author.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Controllers\BookCopyController.java
+C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Validator\ValuesAllowedValidator.java
 C:\Users\Genos\IdeaProjects\Springoteka\backend\src\main\java\Pracownia\Projekt\Spring\Services\BookService.java
